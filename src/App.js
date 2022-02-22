@@ -1,24 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Home from './pages/Home';
+import Chat from './pages/Chat';
+import { useState } from 'react';
+
 
 function App() {
+  const [pseudo, setPseudo] = useState("");
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="container">
+        <article>
+          <header>
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/">Accueil</Link>
+                </li>
+                <li>
+                  <Link to="/chat">Chat</Link>
+                </li>
+              </ul>
+            </nav>
+            <h1>React Chat 🐱</h1>
+          </header>
+        </article>
+
+        <Routes>
+          <Route
+            path="/"
+            element={<Home pseudo={pseudo} onChange={setPseudo} />}
+          ></Route>
+          <Route path="/chat" element={<Chat pseudo={pseudo} />}></Route>
+          <Route></Route>
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
